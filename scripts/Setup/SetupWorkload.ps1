@@ -71,6 +71,137 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
     exit 1
 }
 
+###############################################################################
+# Check and Install Required Tools
+###############################################################################
+Write-Host "Checking for required tools..." -ForegroundColor Blue
+Write-Host ""
+
+# Check for Node.js and npm
+$nodeVersion = $null
+try {
+    $nodeVersion = node --version 2>$null
+} catch {
+    $nodeVersion = $null
+}
+
+if ($null -eq $nodeVersion) {
+    Write-Host "Node.js is not installed. Installing Node.js..." -ForegroundColor Yellow
+    
+    if ($IsLinux) {
+        Write-Host "Installing Node.js via apt-get..."
+        try {
+            sudo apt-get update -qq
+            sudo apt-get install -y nodejs npm
+            Write-Host "✅ Node.js installed successfully" -ForegroundColor Green
+        } catch {
+            Write-Error "Failed to install Node.js. Please install it manually from https://nodejs.org/"
+            exit 1
+        }
+    } elseif ($IsMacOS) {
+        Write-Host "Installing Node.js via Homebrew..."
+        try {
+            brew install node
+            Write-Host "✅ Node.js installed successfully" -ForegroundColor Green
+        } catch {
+            Write-Error "Failed to install Node.js. Please install it manually from https://nodejs.org/"
+            exit 1
+        }
+    } elseif ($IsWindows) {
+        Write-Error "Node.js is not installed. Please install it from https://nodejs.org/ and run this script again."
+        exit 1
+    } else {
+        Write-Error "Unsupported operating system. Please install Node.js manually from https://nodejs.org/"
+        exit 1
+    }
+    
+    # Verify installation
+    $nodeVersion = node --version 2>$null
+    if ($null -eq $nodeVersion) {
+        Write-Error "Node.js installation verification failed. Please install it manually."
+        exit 1
+    }
+} else {
+    Write-Host "✅ Node.js is installed: $nodeVersion" -ForegroundColor Green
+}
+
+# Check for npm
+$npmVersion = $null
+try {
+    $npmVersion = npm --version 2>$null
+} catch {
+    $npmVersion = $null
+}
+
+if ($null -eq $npmVersion) {
+    Write-Error "npm is not installed. It should come with Node.js. Please reinstall Node.js from https://nodejs.org/"
+    exit 1
+} else {
+    Write-Host "✅ npm is installed: v$npmVersion" -ForegroundColor Green
+}
+
+# Check for Azure CLI
+$azVersion = $null
+try {
+    $azVersion = az --version 2>$null
+} catch {
+    $azVersion = $null
+}
+
+if ($null -eq $azVersion) {
+    Write-Host "Azure CLI is not installed. Installing Azure CLI..." -ForegroundColor Yellow
+    
+    if ($IsLinux) {
+        Write-Host "Installing Azure CLI via apt-get..."
+        try {
+            # Install Azure CLI for Debian/Ubuntu using the installation script
+            bash -c "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash"
+            
+            Write-Host "✅ Azure CLI installed successfully" -ForegroundColor Green
+        } catch {
+            Write-Warning "Failed to install Azure CLI automatically. You may need to install it manually."
+            Write-Host "Visit: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli"
+            Write-Host "Note: Azure CLI is only required if you plan to create new Entra (AAD) applications."
+            Write-Host "You can proceed without it if you already have an Application ID."
+        }
+    } elseif ($IsMacOS) {
+        Write-Host "Installing Azure CLI via Homebrew..."
+        try {
+            brew update
+            brew install azure-cli
+            Write-Host "✅ Azure CLI installed successfully" -ForegroundColor Green
+        } catch {
+            Write-Warning "Failed to install Azure CLI automatically. You may need to install it manually."
+            Write-Host "Visit: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli"
+            Write-Host "Note: Azure CLI is only required if you plan to create new Entra (AAD) applications."
+        }
+    } elseif ($IsWindows) {
+        Write-Warning "Azure CLI is not installed. To install it, visit: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows"
+        Write-Host "Note: Azure CLI is only required if you plan to create new Entra (AAD) applications."
+        Write-Host "You can proceed without it if you already have an Application ID."
+    } else {
+        Write-Warning "Unsupported operating system for automatic Azure CLI installation."
+        Write-Host "Please install it manually from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli"
+        Write-Host "Note: Azure CLI is only required if you plan to create new Entra (AAD) applications."
+    }
+    
+    # Verify installation (non-fatal if it fails)
+    try {
+        $azVersion = az --version 2>$null
+        if ($null -ne $azVersion) {
+            Write-Host "✅ Azure CLI is installed" -ForegroundColor Green
+        }
+    } catch {
+        Write-Host "⚠️  Azure CLI verification could not be completed" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "✅ Azure CLI is installed" -ForegroundColor Green
+}
+
+Write-Host ""
+Write-Host "All required tools check completed!" -ForegroundColor Green
+Write-Host ""
+
 # check if the setup has already been done and ask if you want to force it 
 
 
