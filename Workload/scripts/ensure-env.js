@@ -32,11 +32,6 @@ let templateContent = fs.readFileSync(envTemplatePath, 'utf8');
 templateContent = templateContent
     .replace('<YOUR_ENTRA_APP_ID>', '00000000-0000-0000-0000-000000000000');
 
-// Add LOG_LEVEL if not present
-if (!templateContent.includes('LOG_LEVEL=')) {
-    templateContent += '\nLOG_LEVEL=debug\n';
-}
-
 // Write .env.dev file
 fs.writeFileSync(envDevPath, templateContent, 'utf8');
 
