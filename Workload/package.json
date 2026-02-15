@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "ImpactIQ Semantic Link Labs - Fabric Workload for Power BI Governance",
   "scripts": {
+    "prestart": "node ./scripts/ensure-env.js",
     "start": "npm run start:devServer",
     "start:devServer": "env-cmd -f .env.dev webpack serve --open --config ./devServer/webpack.dev.js",
     "start:devGateway": "node ./devServer/start-devGateway.js",
