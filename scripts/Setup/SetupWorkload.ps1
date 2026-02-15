@@ -92,13 +92,13 @@ if ($null -eq $nodeVersion) {
         Write-Host "Installing Node.js via apt-get..."
         try {
             # Update package lists
-            $updateResult = sudo apt-get update -qq 2>&1
+            sudo apt-get update -qq 2>&1 | Out-Null
             if ($LASTEXITCODE -ne 0) {
                 throw "apt-get update failed"
             }
             
             # Install Node.js and npm
-            $installResult = sudo apt-get install -y nodejs npm 2>&1
+            sudo apt-get install -y nodejs npm 2>&1 | Out-Null
             if ($LASTEXITCODE -ne 0) {
                 throw "apt-get install failed"
             }
@@ -168,7 +168,7 @@ if ($null -eq $azVersion) {
         Write-Host "Installing Azure CLI via apt-get..."
         try {
             # Install Azure CLI for Debian/Ubuntu using the installation script
-            $installScript = bash -c "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash" 2>&1
+            bash -c "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash" 2>&1 | Out-Null
             if ($LASTEXITCODE -ne 0) {
                 throw "Azure CLI installation script failed"
             }
@@ -176,7 +176,7 @@ if ($null -eq $azVersion) {
             Write-Host "✅ Azure CLI installed successfully" -ForegroundColor Green
         } catch {
             Write-Warning "Failed to install Azure CLI automatically. You may need to install it manually."
-            Write-Host "Visit: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli"
+            Write-Host "Visit: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli"
             Write-Host "Note: Azure CLI is only required if you plan to create new Entra (AAD) applications."
             Write-Host "You can proceed without it if you already have an Application ID."
         }
@@ -194,16 +194,16 @@ if ($null -eq $azVersion) {
             Write-Host "✅ Azure CLI installed successfully" -ForegroundColor Green
         } catch {
             Write-Warning "Failed to install Azure CLI automatically. You may need to install it manually."
-            Write-Host "Visit: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli"
+            Write-Host "Visit: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli"
             Write-Host "Note: Azure CLI is only required if you plan to create new Entra (AAD) applications."
         }
     } elseif ($IsWindows) {
-        Write-Warning "Azure CLI is not installed. To install it, visit: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows"
+        Write-Warning "Azure CLI is not installed. To install it, visit: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows"
         Write-Host "Note: Azure CLI is only required if you plan to create new Entra (AAD) applications."
         Write-Host "You can proceed without it if you already have an Application ID."
     } else {
         Write-Warning "Unsupported operating system for automatic Azure CLI installation."
-        Write-Host "Please install it manually from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli"
+        Write-Host "Please install it manually from https://learn.microsoft.com/en-us/cli/azure/install-azure-cli"
         Write-Host "Note: Azure CLI is only required if you plan to create new Entra (AAD) applications."
     }
     
