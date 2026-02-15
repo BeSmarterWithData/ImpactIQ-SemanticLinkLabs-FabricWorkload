@@ -36,5 +36,6 @@ templateContent = templateContent
 fs.writeFileSync(envDevPath, templateContent, 'utf8');
 
 console.log('✅ Created .env.dev file from template with default development values');
-console.log('📝 Note: You may need to update FRONTEND_APPID with your actual Entra App ID');
-console.log('   To do a full setup with Entra app creation, run: cd ../scripts/Setup && pwsh ./Setup.ps1');
+console.log('📝 Note: For production use, update FRONTEND_APPID in .env.dev with your actual Entra App ID');
+console.log('   To run the full setup wizard with Entra app creation:');
+console.log('   cd ../scripts/Setup && pwsh ./Setup.ps1');
