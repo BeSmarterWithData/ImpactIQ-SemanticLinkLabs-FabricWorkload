@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Fabric.Security</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult">
+            <summary>
+            This is the wrapper of AuthenticationResult class.
+            We use a wrapper to facilitate unit tests.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult"/> class.<br/>
+            For <b>TEST</b> purpose only.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.#ctor(Microsoft.Identity.Client.AuthenticationResult)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult"/> class.
+            </summary>
+            <param name="result">AuthenticationResult instance.</param>
+        </member>
+        <member name="P:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.ClientAuthenticationResult">
+            <summary>
+            Gets the wrapped <see cref="T:Microsoft.Identity.Client.AuthenticationResult"/> instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.AccessToken">
+            <inheritdoc cref="P:Microsoft.Identity.Client.AuthenticationResult.AccessToken"/>
+        </member>
+        <member name="P:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.Account">
+            <inheritdoc cref="P:Microsoft.Identity.Client.AuthenticationResult.Account"/>
+        </member>
+        <member name="P:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.ExpiresOn">
+            <inheritdoc cref="P:Microsoft.Identity.Client.AuthenticationResult.ExpiresOn"/>
+        </member>
+        <member name="P:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.TenantId">
+            <inheritdoc cref="P:Microsoft.Identity.Client.AuthenticationResult.TenantId"/>
+        </member>
+        <member name="P:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.IdToken">
+            <inheritdoc cref="P:Microsoft.Identity.Client.AuthenticationResult.IdToken"/>
+        </member>
+        <member name="P:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.Scopes">
+            <inheritdoc cref="P:Microsoft.Identity.Client.AuthenticationResult.Scopes"/>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.FabricAuthenticationResult.CreateAuthorizationHeader">
+            <inheritdoc cref="M:Microsoft.Identity.Client.AuthenticationResult.CreateAuthorizationHeader"/>
+        </member>
+        <member name="T:Microsoft.Fabric.Security.Authentication.IActiveDirectoryAuthenticator">
+            <summary>
+            A thin testability wrapper around AAD auth.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.IActiveDirectoryAuthenticator.GetUserTokenAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            Acquires security token interactive from the authority.
+            </summary>
+            <param name="authority">Address of the authority to issue token.</param>
+            <param name="resource">Identifier of the target resource that is the recipient of the requested token.</param>
+            <param name="clientID">Identifier of the client requesting the token.</param>
+            <param name="audience">Identifier of the the audience (scopes) requesting the token</param>
+            <returns>
+            It contains Access Token and the Access Token's expiration time.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Security.Authentication.IActiveDirectoryTokenFetcher">
+            <summary>
+            A  testability wrapper around acquiring an AAD token.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.IActiveDirectoryTokenFetcher.GetUserTokenAsync(Microsoft.Identity.Client.IPublicClientApplication,System.String[])">
+            <summary>
+            Acquires Active Directory Interactive Token for Trident Workload Proxy to be used.
+            </summary>
+            <param name="clientAppToUse">Client Application with Authority and Certificate used to acquire token for client.</param>
+            <param name="scopes">The resource and permission level to acquire token for.</param>
+            <returns>Returns an authentication result which contains the token.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.IAuthenticationTokenProvider.GetUserTokenAsync(Microsoft.Fabric.Environments.EnvironmentInfo,System.String)">
+            <summary>
+            Get the access token for authenticating requests to key vault.
+            </summary>
+            <param name="environmentInfo">environment info</param>
+            <param name="audience">audience</param>
+            <returns>Returns the access token</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator">
+            <summary>
+            A thin testability wrapper around AAD auth.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.#ctor(Microsoft.Fabric.Security.Authentication.IActiveDirectoryTokenFetcher,Microsoft.Extensions.Logging.ILogger{Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator" /> class
+            </summary>
+            <param name="logger">tracer adapter</param>
+            <param name="activeDirectoryTokenFetcher">Specified instance of ActiveDirectoryToken to use.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.GetUserTokenAsync(System.String,System.String,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.GetPublicDictionarySize">
+            <summary>
+            Get size of dictionary of Public Client Applications.
+            </summary>
+            <returns>Dictionary of Client Application for this ActiveDirectoryAuthenticator instance.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.CreatePublicClientApp(System.String,System.String)">
+            <summary>
+            Creates confidential client application
+            </summary>
+            <param name="authority">Authority to request tokens from</param>
+            <param name="clientID">ClientID of the application</param>
+            <returns>Confidential Client Application</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.ClientAppInfo.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.ClientAppInfo" /> class
+            </summary>
+            <param name="authority">Authority to request tokens from</param>
+            <param name="clientID">ClientID of the application</param>
+        </member>
+        <member name="T:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.ClientAppInfo.Comparer">
+            <summary>
+             Class that overrides the Equals operator and GetHashCode operator to use in clientApplication dictionary
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.ClientAppInfo.Comparer.Equals(Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.ClientAppInfo,Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.ClientAppInfo)">
+            <summary>
+            Equals operator for two ClientAppKey objects
+            </summary>
+            <param name="x">One object to compare</param>
+            <param name="y">The other object to compare</param>
+            <returns>Whether the two objects are equal</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.ClientAppInfo.Comparer.GetHashCode(Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryAuthenticator.ClientAppInfo)">
+            <summary>
+            Hashes ClientAppKey object passed in
+            </summary>
+            <param name="key">ClientAppKey object to create a hash for</param>
+            <returns>Hashed valued</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryTokenFetcher">
+            <summary>
+            A  testability wrapper around acquiring an AAD token.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveActiveDirectoryTokenFetcher.GetUserTokenAsync(Microsoft.Identity.Client.IPublicClientApplication,System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Fabric.Security.Authentication.InteractiveAuthenticationTokenProvider">
+            <inheritdoc />
+        </member>
+        <member name="F:Microsoft.Fabric.Security.Authentication.InteractiveAuthenticationTokenProvider._activeDirectoryAuthenticator">
+            <summary>
+            Delegate actual token acquisition to a supporting class to allow for testability.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveAuthenticationTokenProvider.#ctor(Microsoft.Fabric.Security.Authentication.IActiveDirectoryAuthenticator,Microsoft.Extensions.Logging.ILogger{Microsoft.Fabric.Security.Authentication.InteractiveAuthenticationTokenProvider})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Security.Authentication.InteractiveAuthenticationTokenProvider" /> class.
+            </summary>
+            <param name="tracerAdapter">tracer adapter.</param>
+            <param name="activeDirectoryAuthenticator">The authenticator to use for testing.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.Authentication.InteractiveAuthenticationTokenProvider.GetUserTokenAsync(Microsoft.Fabric.Environments.EnvironmentInfo,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Fabric.Workloads.Security.Authentication.ServiceCollectionFabricAuthenticationExtensions.AddFabricAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds Fabric authentication services to the service collection.
+            </summary>
+            <param name="services">The current service collection.</param>
+        </member>
+    </members>
+</doc>

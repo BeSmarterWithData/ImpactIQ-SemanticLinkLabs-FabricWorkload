@@ -1,0 +1,640 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Fabric.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Fabric.Endpoints.EndpointDefinitionExtensions">
+            <summary>
+            Extension methods for endpoint definitions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Endpoints.EndpointDefinitionExtensions.ToEndpointDefinition(System.Uri)">
+            <summary>
+            Gets an endpoint definition from a URI.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Endpoints.EndpointDefinitionExtensions.ToEndpointMapping(Microsoft.Fabric.Endpoints.IEndpointDefinition,System.String)">
+            <summary>
+            Gets an endpoint mapping from an endpoint definition.
+            </summary>
+            <param name="definition">The endpoint definition.</param>
+            <param name="incomingUrlPathPrefix">An optional incoming URL prefix.</param>
+        </member>
+        <member name="T:Microsoft.Fabric.Endpoints.IEndpointDefinition">
+            <summary>
+            Holds the basic definition for an endpoint.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Endpoints.IEndpointDefinition.BasePath">
+            <summary>
+            Gets or sets base path the endpoint listener should use.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Endpoints.IEndpointDefinition.Protocol">
+            <summary>
+            Gets or sets the communication protocol.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Endpoints.IEndpointDefinition.HostOrIp">
+            <summary>
+            Gets or sets the node's hostname or IP.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Endpoints.IEndpointDefinition.Port">
+            <summary>
+            Gets or sets the port.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Endpoints.IEndpointMapping.IncomingUrlPathPrefix">
+            <summary>
+            Gets or sets url path prefix for incoming requests to be handled by relay forwarding service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Endpoints.IEndpointMapping.OutgoingEndpoint">
+            <summary>
+            Gets or sets outgoing endpoint to which requests will be routed by relay forwarding service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Endpoints.IEndpointMapping.IsPublicEndpoint">
+            <summary>
+            Gets or sets if the endpoint is public which requests will be routed by relay forwarding service.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Environments.EnvironmentType.Local">
+            <summary>
+            Fully local environment
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Environments.EnvironmentType.Onebox">
+            <summary>
+            Onebox
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Environments.EnvironmentType.PPE">
+            <summary>
+            Edog, int3
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Environments.EnvironmentType.CST">
+            <summary>
+            CST for E2E testing
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Environments.EnvironmentType.Daily">
+            <summary>
+            Daily
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Environments.EnvironmentType.DXT">
+            <summary>
+             DXT
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Environments.EnvironmentType.MSIT">
+            <summary>
+             MSIT
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Environments.EnvironmentType.Public">
+            <summary>
+            Public, production
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.DelegateEnumerableExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:System.Delegate"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.DelegateEnumerableExtensions.AggregateDelegates``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Aggregates multiple delegates into a single delegate.
+            </summary>
+            <typeparam name="TDelegate">The delegate type.</typeparam>
+            <param name="delegates">The delegates to aggregate.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Fabric.FabricException">
+            <summary>
+            Represents an exception thrown by a Fabric framework component.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.FabricException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.FabricException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.FabricException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.FabricException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a <see langword="null" /> reference
+            (Nothing in Visual Basic) if no inner exception is specified.
+            </param>
+        </member>
+        <member name="M:Microsoft.Fabric.FabricException.#ctor(System.String,System.Collections.Generic.IEnumerable{System.Exception})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.FabricException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerExceptions">
+            The exceptions that are the cause of the current exception.
+            </param>
+        </member>
+        <member name="M:Microsoft.Fabric.FabricException.#ctor(System.String,System.Exception[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.FabricException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerExceptions">
+            The exceptions that are the cause of the current exception.
+            </param>
+        </member>
+        <member name="M:Microsoft.Fabric.FabricException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.FabricException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="errorCode">The exception error code.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.FabricException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.FabricException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a <see langword="null" /> reference
+            (Nothing in Visual Basic) if no inner exception is specified.
+            </param>
+            <param name="errorCode">The exception error code.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.FabricException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <inheritdoc cref="M:System.Exception.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"/>
+        </member>
+        <member name="P:Microsoft.Fabric.FabricException.ErrorCode">
+            <summary>
+            Gets the error code associated with the exception.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Operations.FabricExecutionContext">
+            <summary>
+            Represents the execution context for a fabric operation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Operations.FabricExecutionContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Operations.FabricExecutionContext"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Operations.FabricExecutionContext.CapacityObjectId">
+            <summary>
+            Gets the capacity object id that this fabric operation is operating on
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Operations.FabricExecutionContext.TenantObjectId">
+            <summary>
+            Gets the tenant ID for this fabric operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Operations.FabricExecutionContext.Properties">
+            <summary>
+            Gets the properties associated with this fabric operation execution.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Operations.FabricExecutionContext.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Fabric.Http.ApiRequestHeaders">
+            <summary>
+            This defines the MWC request headers.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.ActivityIdHeaderFormat">
+            <summary>
+            The format to use for serializing activity ids.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.ParentActivityId">
+            <summary>
+            The parent activity id
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.RootActivityId">
+            <summary>
+            The root activity id
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.PremiumCapacityHeader">
+            <summary>
+            The premium capacity header
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.XmlaServer">
+            <summary>
+            The XMLA routing to server
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.UntrustedWorkloadCapacityHeader">
+            <summary>
+            The header which contains capacity header info for untrusted workloads
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.WorkloadIgnoreSxSVersionOverrideHeader">
+            <summary>
+            Mwc request header to let workload ignore side by side version overrides
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.WorkloadThrottlingDelayHeader">
+            <summary>
+            A header used internally to store the request throttling delay, in milliseconds
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.ThrottlingCapacityOverloadStateHeader">
+            <summary>
+            A header used internally to store capacity overload state, in case of overload carry forward throttling
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.OriginalAadToken">
+            <summary>
+            The user AAD token
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.MwcActorTokenHeader">
+            <summary>
+            MWC actor authorization token header
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.MwcSourceCapacityIdHeader">
+            <summary>
+            MWC source capacity id header
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.AuthorizationHeader">
+            <summary>
+            Authorization header
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.BearerScheme">
+            <summary>
+            Bearer scheme
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Http.ApiRequestHeaders.Origin">
+            <summary>
+            Origin
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Http.FabricContextHeader">
+            <summary>
+            Structure which represents a value for header <see cref="F:Microsoft.Fabric.Http.FabricContextHeader.HeaderName"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Http.FabricContextHeader.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Http.FabricContextHeader"/> struct.
+            </summary>
+            <param name="capacityObjectId">Customer capacity object ID.</param>
+            <param name="tenantObjectId">Tenant object ID.</param>
+        </member>
+        <member name="P:Microsoft.Fabric.Http.FabricContextHeader.CapacityObjectId">
+            <summary>
+            Gets capacity object ID.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Http.FabricContextHeader.TenantObjectId">
+            <summary>
+            Gets tenant object ID.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Http.FabricContextHeader.ToStringAsJson">
+            <summary>
+            Converts the current object to JSON string.
+            </summary>
+            <returns>JSON string.</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Http.HttpClientHandlerFactory">
+            <summary>
+            A factory for creating HTTP client handlers to communicate with MWC services.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Http.HttpClientHandlerFactory.#ctor(Microsoft.Fabric.Security.ICertificateDeserializer,Microsoft.Fabric.Workloads.Http.WorkloadHttpClientsOptions,Microsoft.Extensions.Logging.ILogger{Microsoft.Fabric.Http.HttpClientHandlerFactory})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Http.HttpClientHandlerFactory"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Http.HttpClientHandlerFactory.GetHttpClientHandler">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Fabric.Http.HttpClientHandlerFactory.GetHttpClientHandler(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Fabric.Http.IHttpClientHandlerFactory">
+            <summary>
+            A factory abstraction for creating HTTP client handlers.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Http.IHttpClientHandlerFactory.GetHttpClientHandler">
+            <summary>
+            Creates a default instance of <see cref="T:System.Net.Http.HttpClientHandler"/>.
+            </summary>
+            <returns>An instance of <see cref="T:System.Net.Http.HttpMessageHandler"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Http.IHttpClientHandlerFactory.GetHttpClientHandler(System.String,System.String)">
+            <summary>
+            Creates a default instance of <see cref="T:System.Net.Http.HttpClientHandler"/> with client certificate and server certificate validation for the specified thumbprint.
+            </summary>
+            <param name="serverCertificateThumbprint">The expected server certificate thumbprint to validate.</param>
+            <param name="clientCertificateThumbprint">The client certificate thumbprint to use.</param>
+            <returns>An instance of <see cref="T:System.Net.Http.HttpMessageHandler"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Security.ICertificateDeserializer">
+            <summary>
+            Platform abstraction for deserializing certificates
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.ICertificateDeserializer.DeserializeAndImportCertificateToCurrentUserStore(System.String,System.String)">
+            <summary>
+            Deserializes base64 encoded exported certificate bytes with private key in the CurrentUserStore
+            </summary>
+            <param name="base64EncodedCertificateBytes">base64 encoded exported certificate bytes with private key</param>
+            <param name="certificatePrivateKeyPassword">password used to export certificate private keys</param>
+            <returns>X509Certificate2 represented by base64encodedCertificateBytes</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.ICertificateDeserializer.DeserializeAndImportCertificateToLocalMachineStore(System.String,System.String)">
+            <summary>
+            Deserializes base64 encoded exported certificate bytes with private key and stores in the LocalMachine store
+            Function will be deprecated once all certs read by workloads are moved to CurrentUser Store
+            </summary>
+            <param name="base64EncodedCertificateBytes">base64 encoded exported certificate bytes with private key</param>
+            <param name="certificatePrivateKeyPassword">password used to export certificate private keys</param>
+            <returns>X509Certificate2 represented by base64encodedCertificateBytes</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.ICertificateDeserializer.DeserializeCertificate(System.String,System.String,System.Security.Cryptography.X509Certificates.X509KeyStorageFlags)">
+            <summary>
+            Deserializes base64 encoded exported certificate bytes with private key
+            </summary>
+            <param name="base64EncodedCertificateBytes">base64 encoded exported certificate bytes with private key</param>
+            <param name="certificatePrivateKeyPassword">password used to export certificate private keys</param>
+            <param name="flags">The certificate storage flags</param>
+            <returns>X509Certificate2 represented by base64encodedCertificateBytes</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Security.CertificateUtilities">
+            <summary>
+            [ToBeMovedToFutureCommonAssembly] - Taken from ServicePlatform and it should be moved to a shared common security assembly.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Security.CertificateUtilities.TryLoadCertificate(System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.StoreName,System.Security.Cryptography.X509Certificates.X509FindType,System.String)">
+            <summary>
+            Retrieves <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2"/> by X509FindType from the specified store (the first one in the list)
+            </summary>
+            <param name="certificateStoreLocation">The certificate store location</param>
+            <param name="certificateStoreName">Certificate store name</param>
+            <param name="findType">X509 certificate FindType</param>
+            <param name="certificateProperty">The cert property value</param>
+            <returns>Requested <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2"/> or null if no certificate was found</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Throw">
+            <summary>
+            This type replaces Check from Platform to remove dependencies.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfNullOrEmpty``1(System.Collections.Generic.ICollection{``0},System.String)">
+            <summary>
+            Checks if a collection of elements is null or empty.
+            </summary>
+            <typeparam name="T">The type of elements in collection.</typeparam>
+            <param name="sequence">The collection.</param>
+            <param name="identifierName">The name of the identifier.</param>
+            <exception cref="T:System.InvalidOperationException">If collection is null or empty.</exception>
+            <remarks>Not using <see cref="T:System.Collections.Generic.IEnumerable`1"/> as it can trigger deferred execution.</remarks>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfNullOrEmpty``1(System.Collections.Generic.IList{``0},System.String)">
+            <summary>
+            Throws an exception if a list of elements is null or empty.
+            </summary>
+            <typeparam name="T">The type of elements in the list.</typeparam>
+            <param name="sequence">The list.</param>
+            <param name="identifierName">The name of the identifier.</param>
+            <exception cref="T:System.ArgumentException">If list is null or empty.</exception>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfArgumentNull(System.Object,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentNullException"/> if the object is null.
+            </summary>
+            <param name="obj">The argument value.</param>
+            <param name="paramName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentNullException">If argument is null.</exception>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfArgumentNullOrEmpty(System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentException"/> if the string is null or empty.
+            </summary>
+            <param name="str">The string value.</param>
+            <param name="paramName">The name of the parameter.</param>
+            <exception cref="T:System.ArgumentException">If string value is null or empty.</exception>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfArgumentNullOrEmpty``1(System.Collections.Generic.ICollection{``0},System.String)">
+            <summary>
+            Checks if a collection of elements is null or empty.
+            </summary>
+            <typeparam name="T">The type of elements in collection.</typeparam>
+            <param name="sequence">The collection.</param>
+            <param name="paramName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentException">If collection is null or empty.</exception>
+            <remarks>Not using <see cref="T:System.Collections.Generic.IEnumerable`1"/> as it can trigger deferred execution.</remarks>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfArgumentNullOrEmpty``1(System.Collections.Generic.IList{``0},System.String)">
+            <summary>
+            Throws an exception if a list of elements is null or empty.
+            </summary>
+            <typeparam name="T">The type of elements in the list.</typeparam>
+            <param name="sequence">The list.</param>
+            <param name="paramName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentException">If list is null or empty.</exception>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfArgumentNullOrWhiteSpace(System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentException"/> if the string is null or empty.
+            </summary>
+            <param name="str">The string argument value.</param>
+            <param name="paramName">The name of the argument.</param>
+            <exception cref="T:System.ArgumentException">If the string value is null or white space.</exception>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfNullOrWhiteSpace(System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.InvalidOperationException"/> if the string is null or white space.
+            </summary>
+            <param name="str">The string value to evaluate.</param>
+            <param name="message">A message describing the problem.</param>
+            <exception cref="T:System.InvalidOperationException">If the specified string value is null or white space</exception>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfNullOrEmpty(System.String,System.String)">
+            <summary>
+            Throws an <see cref="T:System.InvalidOperationException"/> if the string is null or empty.
+            </summary>
+            <param name="str">The string value to evaluate.</param>
+            <param name="message">The message describing the problem.</param>
+            <exception cref="T:System.InvalidOperationException">If the specified string value is null or empty.</exception>
+        </member>
+        <member name="M:Microsoft.Fabric.Throw.IfNot(System.Boolean,System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentException"/> if the evaluated condition is false.
+            </summary>
+            <param name="condition">A condition evaluation.</param>
+            <param name="message">A message describing the problem.</param>
+            <exception cref="T:System.InvalidOperationException">If evaluated condition is false.</exception>
+        </member>
+        <member name="T:Microsoft.Fabric.Utilities.CompatibilityClaimConverter">
+            <summary>
+            The internals of System.Security.Claims.Claim class changed between net472 and .NET. That is a problem when we use the out-of-the-box json formatter to write a .NET
+            Claim object and try to read it in net472, as we're using the internal field names. This converter reads and writes .NET Claims the same way as net472 Claims.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Utilities.CompatibilityClaimConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Reads a Claim object from a JSON string.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Utilities.CompatibilityClaimConverter.Write(System.Text.Json.Utf8JsonWriter,System.Security.Claims.Claim,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            Writes a Claim object to a JSON stream.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Utilities.NetworkUtils.GetFreePort">
+            <summary>
+            Gets the next free port from the ephemeral port range.
+            </summary>
+            <returns>A free port.</returns>
+            <remarks>
+            The function uses underlying OS to assign a port and relies on the fact that OS will cycle through the rest of
+            the ephemeral ports before assigning the same port again. In rare cases there can still be a race condition so
+            callers need to be prepared to handle that.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Fabric.Workloads.Http.WorkloadHttpClientsOptions">
+            <summary>
+            Options to configure  workload http clients.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Workloads.Http.WorkloadHttpClientsOptions.WorkloadsShouldUseUserCertStore">
+            <summary>
+            Gets a value indicating whether the workloads should use the user certificate store.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Workloads.Http.WorkloadHttpClientsOptions.WorkloadCertificatePfx">
+            <summary>
+            Gets the path to the workload certificate pfx.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Workloads.Http.WorkloadHttpClientsOptions.WorkloadCertificatePassword">
+            <summary>
+            Gets the password for the workload certificate.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Workloads.Endpoints.WorkloadEndpoints">
+            <summary>
+            Common constants related to web APIs.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Workloads.WorkloadKind">
+            <summary>
+            Defines the workload kind.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadKind.Undefined">
+            <summary>
+            Not defined.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadKind.Trusted">
+            <summary>
+            Workload is trusted.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadKind.Untrusted">
+            <summary>
+            Workload is untrusted.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Workloads.WorkloadLifecycleType">
+            <summary>
+            Defines the lifecycle type of workload.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadLifecycleType.Classic">
+            <summary>
+            Classic lifetime management that is used today
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadLifecycleType.Hybrid">
+            <summary>
+            The upcoming way that is vaguely defined so far.
+            One example of Hybrid is 3rd party workloads hosted in external infra and managed either through relay or directly via https.
+            In future workloads utilizing this lifecycle can be hosted in a container in MWC internal infra.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Workloads.WorkloadRunningMode">
+            <summary>
+            Defines possible running modes/configurations that workloads can use.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadRunningMode.Relay">
+            <summary>
+            Also know n as development experience mode. Under this mode workload is hosted in external infra
+            while communication/lifecycle is facilitated by Azure Relay.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadRunningMode.External">
+            <summary>
+            Under this mode workload is hosted in external infra while communication/lifecycle is based on https.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadRunningMode.Container">
+            <summary>
+            Workload is hosted in internal MWC infra while running inside container.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Workloads.WorkloadTrustLevel">
+            <summary>
+            Defines the trust level of the workload.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadTrustLevel.FirstParty">
+            <summary>
+            Workloads created and maintained internally.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Workloads.WorkloadTrustLevel.ThirdParty">
+            <summary>
+            Workloads created and maintained by external engineering teams.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.FabricOptionsConfigurationExtensions">
+            <summary>
+            Configuration extensions for options.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.FabricOptionsConfigurationExtensions.Configure``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{System.IServiceProvider,``0})">
+            <summary>
+            Registers an action to configure a specified type of options, providing an <see cref="T:System.IServiceProvider"/>.
+            </summary>
+            <typeparam name="TOptions">The type of options.</typeparam>
+            <param name="services">The current service collection.</param>
+            <param name="configure">The action used to configure the options.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.FabricOptionsConfigurationExtensions.Configure``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.IServiceProvider,``0})">
+            <summary>
+            Registers an action to configure a specified type of named options, providing an <see cref="T:System.IServiceProvider"/>.
+            </summary>
+            <typeparam name="TOptions">The type of options.</typeparam>
+            <param name="services">The current service collection.</param>
+            <param name="name">The name of the options.</param>
+            <param name="configure">The actions used to configure the options.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

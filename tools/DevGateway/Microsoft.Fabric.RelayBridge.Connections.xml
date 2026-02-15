@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Fabric.RelayBridge.Connections</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Fabric.Relay.Connections.EndpointConnectionsSynchronizer">
+            <summary>
+            Synchronization service for endpoints relay connections.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.EndpointConnectionsSynchronizer.EndpointMappings">
+            <summary>
+            Sets the endpoint mappings for the relay connection.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.EndpointMapping">
+            <summary>
+            An internal implementation for <see cref="T:Microsoft.Fabric.Endpoints.IEndpointMapping"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.EndpointMapping.IncomingUrlPathPrefix">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.EndpointMapping.OutgoingEndpoint">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.EndpointMapping.IsPublicEndpoint">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.RelayConnectionOptions">
+            <summary>
+            A configurable connection options for a relay connection.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptions.EndpointMappings">
+            <summary>
+            Gets the endpoint mappings.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptions.WorkloadId">
+            <summary>
+            Gets or sets the workload id.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptions.MwcRolloutName">
+            <summary>
+            Gets or sets the MwcRolloutName.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptions.ConnectionSynchronizer">
+            <summary>
+            Gets or sets the endpoint connections synchronizer. Useful when synchronizing endpoint readiness on an external service.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.RelayEndpointDefinition">
+            <inheritdoc cref="T:Microsoft.Fabric.Endpoints.IEndpointDefinition"/>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayEndpointDefinition.BasePath">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayEndpointDefinition.Protocol">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayEndpointDefinition.HostOrIp">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayEndpointDefinition.Port">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.ServiceCollectionFabricRelayConnectionsExtensions">
+            <summary>
+            Extension methos for adding relay connections to the service collection.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.ServiceCollectionFabricRelayConnectionsExtensions.AddRelayConnections(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Collections.Generic.IEnumerable{Microsoft.Fabric.Endpoints.IEndpointDefinition})">
+            <summary>
+            Adds relay connections to the service collection.
+            </summary>
+            <param name="services">The current service collection.</param>
+            <param name="endpoints">The list of endpoint definitions to relay.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.ServiceCollectionFabricRelayConnectionsExtensions.AddRelayConnections(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Fabric.Relay.Connections.RelayConnectionOptions})">
+            <summary>
+            Adds relay connections to the service collection.
+            </summary>
+            <param name="services">The current service collection.</param>
+            <param name="configure">The action to configure the relay options.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.ServiceCollectionFabricRelayConnectionsExtensions.AddRelayConnections(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{System.IServiceProvider,Microsoft.Fabric.Relay.Connections.RelayConnectionOptions})">
+            <summary>
+            Adds relay connections to the service collection.
+            </summary>
+            <param name="services">The current service collection.</param>
+            <param name="configure">The action to configure the relay options.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.ServiceCollectionFabricRelayConnectionsExtensions.AddRelayConnections``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{``0})">
+            <summary>
+            Adds relay connections to the service collection.
+            </summary>
+            <typeparam name="TConnectionOptions">The type of <see cref="T:Microsoft.Fabric.Relay.Connections.RelayConnectionOptions"/>.</typeparam>
+            <param name="services">The current service collection.</param>
+            <param name="configure">The action to configure the relay options.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.ServiceCollectionFabricRelayConnectionsExtensions.AddRelayConnections(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{Microsoft.Fabric.Relay.Connections.RelayConnectionOptions,System.Collections.Generic.IEnumerable{Microsoft.Fabric.Relay.Connections.EndpointMapping}})">
+            <summary>
+            Adds relay connections to the service collection.
+            </summary>
+            <param name="services">The current service collection.</param>
+            <param name="endpointMappings">The endpoint mappings for the relay.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.ServiceCollectionFabricRelayConnectionsExtensions.AddRelayConnections``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{``0,System.Collections.Generic.IEnumerable{Microsoft.Fabric.Relay.Connections.EndpointMapping}},System.Collections.Generic.Dictionary{System.String,System.String},System.ValueTuple{System.Func{``0,System.Boolean},System.String}[])">
+            <summary>
+            Adds relay connections to the service collection.
+            </summary>
+            <typeparam name="TConnectionOptions">The type of <see cref="T:Microsoft.Fabric.Relay.Connections.RelayConnectionOptions"/>.</typeparam>
+            <param name="services">The current service collection.</param>
+            <param name="endpointMappingsFactory">A function to provide endpoint mappings.</param>
+            <param name="additionalCommandArgsMappings">Additional command arguments to configure options.</param>
+            <param name="validationRules">Validation rules for options.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Fabric.RelayBridge.Connections.IsRelayBridgeConnectionConfigured`1">
+            <summary>
+            Provides information about Relay Bridge configuration.
+            </summary>
+            <typeparam name="TOptions">The type of the Relay connection options.</typeparam>
+        </member>
+        <member name="M:Microsoft.Fabric.RelayBridge.Connections.IsRelayBridgeConnectionConfigured`1.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.RelayBridge.Connections.IsRelayBridgeConnectionConfigured`1"/> class.
+            </summary>
+            <param name="services">The application service provider.</param>
+            <param name="logger">The tracer adapter.</param>
+        </member>
+        <member name="P:Microsoft.Fabric.RelayBridge.Connections.IsRelayBridgeConnectionConfigured`1.IsConfigured">
+            <summary>
+            Gets a value indicating whether the Relay Bridge connection is configured.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.RelayBridge.Connections.IsRelayBridgeConnectionConfigured`1.LogMessage">
+            <summary>
+            Gets the log message to use as prefix to the vaildation failures found.
+            </summary>
+        </member>
+    </members>
+</doc>

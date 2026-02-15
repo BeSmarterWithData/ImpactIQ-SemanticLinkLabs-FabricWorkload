@@ -1,0 +1,1155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Fabric.Logging.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Fabric.Logging.CustomDataCollection">
+            <summary>
+            Represents a collection of custom data.
+            </summary>
+            <remarks>
+            This class is not thread-safe to keep performance overhead low.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.CustomDataCollection.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> class.
+            </summary>
+            <param name="eagerlyBuild">
+            A value indicating whether to add values immediately or wait until logging is executed.
+            <para>
+            When a log level is disabled, the custom data is not initialized, and the performance overhead is low.
+            </para>
+            </param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.CustomDataCollection.#ctor(System.Action{Microsoft.Fabric.Logging.ICustomDataCollection})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> class.
+            </summary>
+            <param name="action">An action to populate custom data lazily where is only invocated if log executes for current log level.</param>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.CustomDataCollection.System#Collections#Generic#IReadOnlyDictionary{System#String,System#String}#Keys">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.CustomDataCollection.System#Collections#Generic#IReadOnlyDictionary{System#String,System#String}#Values">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.CustomDataCollection.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.CustomDataCollection.System#Collections#Generic#IReadOnlyDictionary{System#String,System#String}#Item(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.CustomDataCollection.Add``1(System.String,``0)">
+            <summary>
+            Adds a custom data element to the collection.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+            <param name="key">The element key.</param>
+            <param name="value">The element value.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.CustomDataCollection.TryAdd``1(System.String,``0)">
+            <summary>
+            Tries to add a custom data element to the collection.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+            <param name="key">The element key.</param>
+            <param name="value">The element value.</param>
+            <returns>The current collection.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.CustomDataCollection.System#Collections#Generic#IReadOnlyDictionary{System#String,System#String}#ContainsKey(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.CustomDataCollection.System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{System#String,System#String}}#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.CustomDataCollection.System#Collections#Generic#IReadOnlyDictionary{System#String,System#String}#TryGetValue(System.String,System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.CustomDataCollection.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.CustomDataLoggerMessage.Define(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Creates a delegate which can be invoked for logging a message and custom data.
+            </summary>
+            <param name="logLevel">The <see cref="T:Microsoft.Extensions.Logging.LogLevel"/></param>
+            <param name="eventId">The event id</param>
+            <param name="formatString">The named format string</param>
+            <returns>A delegate which when invoked creates a log message.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.CustomDataLoggerMessage.Define``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Creates a delegate which can be invoked for logging a message and custom data.
+            </summary>
+            <typeparam name="T1">The type of the first parameter passed to the named format string.</typeparam>
+            <param name="logLevel">The <see cref="T:Microsoft.Extensions.Logging.LogLevel"/></param>
+            <param name="eventId">The event id</param>
+            <param name="formatString">The named format string</param>
+            <returns>A delegate which when invoked creates a log message.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.CustomDataLoggerMessage.Define``2(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Creates a delegate which can be invoked for logging a message and custom data.
+            </summary>
+            <typeparam name="T1">The type of the first parameter passed to the named format string.</typeparam>
+            <typeparam name="T2">The type of the second parameter passed to the named format string.</typeparam>
+            <param name="logLevel">The <see cref="T:Microsoft.Extensions.Logging.LogLevel"/></param>
+            <param name="eventId">The event id</param>
+            <param name="formatString">The named format string</param>
+            <returns>A delegate which when invoked creates a log message.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.CustomDataLoggerMessage.Define``3(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Creates a delegate which can be invoked for logging a message and custom data.
+            </summary>
+            <typeparam name="T1">The type of the first parameter passed to the named format string.</typeparam>
+            <typeparam name="T2">The type of the second parameter passed to the named format string.</typeparam>
+            <typeparam name="T3">The type of the third parameter passed to the named format string.</typeparam>
+            <param name="logLevel">The <see cref="T:Microsoft.Extensions.Logging.LogLevel"/></param>
+            <param name="eventId">The event id</param>
+            <param name="formatString">The named format string</param>
+            <returns>A delegate which when invoked creates a log message.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.CustomDataLoggerMessage.Define``4(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Creates a delegate which can be invoked for logging a message and custom data.
+            </summary>
+            <typeparam name="T1">The type of the first parameter passed to the named format string.</typeparam>
+            <typeparam name="T2">The type of the second parameter passed to the named format string.</typeparam>
+            <typeparam name="T3">The type of the third parameter passed to the named format string.</typeparam>
+            <typeparam name="T4">The type of the fourth parameter passed to the named format string.</typeparam>
+            <param name="logLevel">The <see cref="T:Microsoft.Extensions.Logging.LogLevel"/></param>
+            <param name="eventId">The event id</param>
+            <param name="formatString">The named format string</param>
+            <returns>A delegate which when invoked creates a log message.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.CustomDataLoggerMessage.Define``5(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,System.String)">
+            <summary>
+            Creates a delegate which can be invoked for logging a message and custom data.
+            </summary>
+            <typeparam name="T1">The type of the first parameter passed to the named format string.</typeparam>
+            <typeparam name="T2">The type of the second parameter passed to the named format string.</typeparam>
+            <typeparam name="T3">The type of the third parameter passed to the named format string.</typeparam>
+            <typeparam name="T4">The type of the fourth parameter passed to the named format string.</typeparam>
+            <typeparam name="T5">The type of the fifth parameter passed to the named format string.</typeparam>
+            <param name="logLevel">The <see cref="T:Microsoft.Extensions.Logging.LogLevel"/></param>
+            <param name="eventId">The event id</param>
+            <param name="formatString">The named format string</param>
+            <returns>A delegate which when invoked creates a log message.</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.Formatters.CustomDataValuesFormatter">
+            <summary>
+            Logging custom data values formatter for non-Fabric loggers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Formatters.CustomDataValuesFormatter.ShouldSerializeCustomData">
+            <summary>
+            Gets or sets a value indicating whether to serialize custom data.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.CustomDataValuesFormatter.Format(System.Collections.Generic.IReadOnlyDictionary{System.String,System.String})">
+            <summary>
+            Formats the custom data values.
+            </summary>
+            <param name="customData">Custom data to format.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter">
+            <summary>
+            Formatter to convert the named format items like {NamedFormatItem} to <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object)"/> format.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter.TracingValueStringBuilder.RawChars">
+            <summary>Gets the underlying storage of the builder.</summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter.TracingValueStringBuilder.GetPinnableReference">
+            <summary>
+            Get a pinnable reference to the builder.
+            Does not ensure there is a null char after <see cref="P:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter.TracingValueStringBuilder.Length"/>
+            This overload is pattern matched in the C# 7.3+ compiler so you can omit
+            the explicit method call, and write eg "fixed (char* c = builder)"
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter.TracingValueStringBuilder.GetPinnableReference(System.Boolean)">
+            <summary>
+            Get a pinnable reference to the builder.
+            </summary>
+            <param name="terminate">Ensures that the builder has a null char after <see cref="P:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter.TracingValueStringBuilder.Length"/></param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter.TracingValueStringBuilder.AsSpan(System.Boolean)">
+            <summary>
+            Returns a span around the contents of the builder.
+            </summary>
+            <param name="terminate">Ensures that the builder has a null char after <see cref="P:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter.TracingValueStringBuilder.Length"/></param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter.TracingValueStringBuilder.Grow(System.Int32)">
+            <summary>
+            Resize the internal buffer either by doubling current buffer size or
+            by adding <paramref name="additionalCapacityBeyondPos"/> to
+            <see cref="F:Microsoft.Fabric.Logging.Formatters.TracingValuesFormatter.TracingValueStringBuilder._pos"/> whichever is greater.
+            </summary>
+            <param name="additionalCapacityBeyondPos">
+            Number of chars requested beyond current position.
+            </param>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.CustomDataLoggerMessageAttribute">
+            <summary>
+            Attribute to mark a method as a custom data logger message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.CustomDataLoggerMessageAttribute.EventId">
+            <summary>
+            Gets the logging event id for the logging method.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.CustomDataLoggerMessageAttribute.EventName">
+            <summary>
+            Gets the logging event name for the logging method.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.CustomDataLoggerMessageAttribute.Level">
+            <summary>
+            Gets the logging level for the logging method.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.CustomDataLoggerMessageAttribute.Message">
+            <summary>
+            Gets the log message for the logging method.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.CustomDataLoggerMessageAttribute.SkipEnabledCheck">
+            <summary>
+            Gets or sets a value indicating whether to skip the enabled check for the logging method.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.GenericLoggingScope">
+            <summary>
+            Basic implementation of <see cref="T:Microsoft.Fabric.Logging.ILoggingScope"/> that only opens and closes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.GenericLoggingScope.#ctor(Microsoft.Extensions.Logging.ILogger,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Logging.GenericLoggingScope"/> class.
+            </summary>
+            <param name="logger">A <see cref="T:Microsoft.Extensions.Logging.ILogger"/> instance.</param>
+            <param name="name">The name for the scope.</param>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.GenericLoggingScope.Name">
+            <summary>
+            Gets the name of the scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.GenericLoggingScope.Microsoft#Fabric#Logging#ILoggingScope#RootActivityId">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.GenericLoggingScope.Microsoft#Fabric#Logging#ILoggingScope#ParentActivityId">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.GenericLoggingScope.Microsoft#Fabric#Logging#ILoggingScope#CurrentActivityId">
+            <inheritdoc/>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.GenericLoggingScope.Microsoft#Fabric#Logging#ILoggingScope#CustomDataProxy">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.ICustomDataCollection">
+            <summary>
+            Represents a collection of custom data for a logging event.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.ICustomDataCollection.Add``1(System.String,``0)">
+            <summary>
+            Adds a custom dimension/metric to be emitted with logging event.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+            <param name="key">The custom data metric/dimension name.</param>
+            <param name="value">The metric/dimension value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.ICustomDataCollection.TryAdd``1(System.String,``0)">
+            <summary>
+            Tries to add a custom dimension/metric to be emitted with logging event.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+            <param name="key">The custom data metric/dimension name.</param>
+            <param name="value">The metric/dimension value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.ICustomDataProxy.AddCustomData(System.String,System.String)">
+            <summary>
+            Adds custom dimension/metric to be emitted with logging scope.
+            </summary>
+            <param name="key">Key for the dimension/metric being added.</param>
+            <param name="value">The dimension/metric value.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.ICustomDataProxy.AddCustomData(System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            Add custom metrics to be emitted with logging scope.
+            </summary>
+            <param name="customData">Dictionary that contains pairs of key and value.</param>
+            <param name="throwWhenKeyExists">A value indicating whether to throw an exception if any of the keys in <paramref name="customData"/> already exists.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.ICustomDataProxy.TryAddCustomData(System.String,System.String)">
+            <summary>
+            Tries adding a custom dimension/metric to be emitted with monitored scope.
+            </summary>
+            <param name="scope">The current <see cref="!:MonitoredScope"/>.</param>
+            <param name="key">Key for the dimension/metric being added.</param>
+            <param name="value">The value of the dimension/metric.</param>
+            <returns><c>true</c> if successfully added; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.IFabricLoggingScopeProvider">
+            <summary>
+            Provides access to Fabric based marker scopes.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.IFabricLoggingScopeProvider.ExecuteInScope(System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Action{Microsoft.Fabric.Logging.ILoggingScope})">
+            <summary>
+            Executes an action in a named scope.
+            </summary>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments.</param>
+            <param name="action">The logic to execute within the scope.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.IFabricLoggingScopeProvider.ExecuteInScope``1(System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,``0})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="func">The logic to execute within the scope.</param>
+            <returns>The value returned by the function.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.IFabricLoggingScopeProvider.ExecuteInScopeAsync(System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task})">
+            <summary>
+            Executes an asynchronous action in a named scope.
+            </summary>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="action">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.IFabricLoggingScopeProvider.ExecuteInScopeAsync``1(System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Executes an asynchronous function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="func">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task returning the value result from the function.</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.ILoggingScope">
+            <summary>
+            A logging scope that provides information about the current logging context.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.ILoggingScope.Name">
+            <summary>
+            Gets the name of the scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.ILoggingScope.RootActivityId">
+            <summary>
+            Gets the root activity ID from correlation manager within the current logging scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.ILoggingScope.ParentActivityId">
+            <summary>
+            Gets the parent activity ID from correlation manager within the current logging scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.ILoggingScope.CurrentActivityId">
+            <summary>
+            Gets the current activity ID from correlation manager within the current logging scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.ILoggingScope.OnDispose">
+            <summary>
+            Gets or sets the action to be executed when the scope is disposed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.ILoggingScope.DependencyMonitor">
+            <summary>
+            Gets the dependency monitor associated with the current logging scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.ILoggingScope.CustomDataProxy">
+            <summary>
+            Gets the custom data management proxy associated with the logging scope.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.LoggerScopeExecutionInfo">
+            <summary>
+            Provides access to Fabric based marker scopes.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.LoggerScopeExecutionInfo.FabricLoggingScopeProvider">
+            <summary>
+            Gets or sets the name of the scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.LoggingScopeInfo.Name">
+            <summary>
+            Gets or sets the name of the scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.LoggingScopeInfo.ParentActivityId">
+            <summary>
+            Gets or sets the parent activity id for the scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.LoggingScopeInfo.RootActivityId">
+            <summary>
+            Gets or sets the root activity id for the scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.LoggingScopeInfo.InnerScope">
+            <summary>
+            Gets or sets the inner scope.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Monitoring.ILoggingDependencyMonitor.Monitor(Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs,System.Action)">
+            <summary>
+            Monitors a dependency within the current scope.
+            </summary>
+            <param name="dependencyArgs">Dependency monitoring arguments.</param>
+            <param name="action">The dependency action to monitor.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Monitoring.ILoggingDependencyMonitor.MonitorAsync(Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs,System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Monitors a dependency within the current scope.
+            </summary>
+            <param name="dependencyArgs">Dependency monitoring arguments.</param>
+            <param name="action">The dependency action to monitor.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Monitoring.ILoggingDependencyMonitor.Monitor``1(Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs,System.Func{``0})">
+            <summary>
+            Monitors a dependency within the current scope.
+            </summary>
+            <typeparam name="TResult">The type of the result returned by dependency invocation.</typeparam>
+            <param name="dependencyArgs">Dependency monitoring arguments.</param>
+            <param name="func">The dependency functionality to monitor.</param>
+            <returns>The result of the dependency invocation.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Monitoring.ILoggingDependencyMonitor.MonitorAsync``1(Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs,System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Monitors a dependency within the current scope.
+            </summary>
+            <typeparam name="TResult">The type of the result returned by dependency invocation.</typeparam>
+            <param name="dependencyArgs">Dependency monitoring arguments.</param>
+            <param name="func">The dependency functionality to monitor.</param>
+            <returns>An awaitable task with the result of the dependency invocation.</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.Monitoring.ILoggingScopeCallback">
+            <summary>
+            Represents a callback that is invoked when a logging scope is finished.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Monitoring.ILoggingScopeCallback.Invoke(System.Int64,System.Int64,System.Collections.Specialized.IOrderedDictionary)">
+            <summary>
+            Invokes the callback.
+            </summary>
+            <param name="reliabilityMetricValue">The reliability metric.</param>
+            <param name="durationMetricValue">The duration metric.</param>
+            <param name="dimensions">Requested dimensions</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Monitoring.ILoggingScopeCallback.Invoke(System.String,System.String,System.Int64,System.Int64,System.Collections.Specialized.IOrderedDictionary)">
+            <summary>
+            Invokes the callback.
+            </summary>
+            <param name="operationNamespace">The namespace of the operation.</param>
+            <param name="operationName">The name of the operation.</param>
+            <param name="reliabilityMetricValue">The reliability metric.</param>
+            <param name="durationMetricValue">The duration metric.</param>
+            <param name="dimensions">Requested dimensions</param>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMetricType">
+            <summary>
+            Type of dependency metric to emit
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMetricType.Availability">
+            <summary>
+            Availability metric
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMetricType.Latency">
+            <summary>
+            Latency Metric
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMetricType.AvailabilityAndLatency">
+            <summary>
+            Both Availability and latency
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs">
+            <summary>
+            Represents the arguments passed for monitoring a dependency.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs.DependencyName">
+            <summary>
+            Gets the name of the dependency.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs.DependencyType">
+            <summary>
+            Gets the type of the dependency.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs.TargetName">
+            <summary>
+            Gets the name of the target on the dependency.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs.MetricType">
+            <summary>
+            Gets the metric type for dependency monitoring.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs.ExceptionFilter">
+            <summary>
+            Gets a filter function to determine if an exception should be considered a dependency failure.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs">
+            <summary>
+            Represents the arguments passed to a logging scope callback.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs"/> class.
+            </summary>
+            <param name="callbackType">The type of the callback.</param>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs.OperationNamespace">
+            <summary>
+            Gets or sets the namespace of the operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs.OperationName">
+            <summary>
+            Gets or sets the name of the operation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs.Dimensions">
+            <summary>
+            Gets or sets the dimensions.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs`1">
+            <summary>
+            Represents the arguments passed to a logging scope callback.
+            </summary>
+            <typeparam name="TCallback">The type of the callback to invoke.</typeparam>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs`1"/> class.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Logging.TracingEventId">
+            <summary>
+            Transformation struct for <see cref="T:Microsoft.Extensions.Logging.EventId"/> for
+            </summary>
+            <param name="eventId"></param>
+        </member>
+        <member name="M:Microsoft.Fabric.Logging.TracingEventId.#ctor(System.String)">
+            <summary>
+            Transformation struct for <see cref="T:Microsoft.Extensions.Logging.EventId"/> for
+            </summary>
+            <param name="eventId"></param>
+        </member>
+        <member name="P:Microsoft.Fabric.Logging.TracingEventId.eventId">
+            <summary></summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Tracing.ITracerAdapter">
+            <summary>
+            TODO: DEPRECATED. It will be switched to ILogger, FabricLoggingExtensions
+            Adapter for tracing from the library. The actual implementation is provided during FabricContextInternal construction.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Tracing.ITracerAdapter.LogVerbose(System.String,System.String,System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Log verbose trace
+            </summary>
+            <param name="message">message text</param>
+            <param name="eventId">optional event id</param>
+            <param name="customData">optional structured data</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Tracing.ITracerAdapter.LogMessage(System.String,System.String,System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Log message trace
+            </summary>
+            <param name="message">message text</param>
+            <param name="eventId">optional event id</param>
+            <param name="customData">optional structured data</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Tracing.ITracerAdapter.LogWarning(System.String,System.String,System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Exception)">
+            <summary>
+            Log warning trace
+            </summary>
+            <param name="message">message text</param>
+            <param name="eventId">optional event id</param>
+            <param name="customData">optional structured data</param>
+            <param name="e">optional exception</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Tracing.ITracerAdapter.LogError(System.String,System.String,System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Exception)">
+            <summary>
+            Log error trace
+            </summary>
+            <param name="message">message text</param>
+            <param name="eventId">optional event id</param>
+            <param name="customData">optional structured data</param>
+            <param name="e">optional exception</param>
+        </member>
+        <member name="T:Microsoft.Extensions.Logging.FabricLoggingExtensions">
+            <summary>
+            Extensions for logging with Fabric.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.FabricLoggingExtensions.LogTrace(Microsoft.Extensions.Logging.ILogger,Microsoft.Fabric.Logging.TracingEventId,System.Func{System.Collections.Generic.IReadOnlyDictionary{System.String,System.String}},System.String,System.Object[])">
+            <summary>
+            Formats and logs a debug log message.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="eventId">The event id associated with the log. You can specify a <see langword="string"/>.</param>
+            <param name="customData">Custom data related to the log.</param>
+            <param name="message">Format string of the log message in message template format. Example: "User {User} logged in from {Address}"</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <remarks>
+            When passing custom data, it's recommended to use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build it.
+            <para>
+            Also, it is recommended to initialize the value within the passed function to reduce performance when the used log level is disabled:
+            <code>
+            var customData = () => new CustomDataCollection().Add("key1", "value1").Add("key2", false);
+            _logger.LogTrace(eventId, customData, "Message");
+            </code>
+            </para>
+            Instead of:
+            <code>
+            var customData = new CustomDataCollection().Add("key1", "value,1").Add("key2", false);
+            _logger.LogTrace(eventId, () => customData, "Message");
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.FabricLoggingExtensions.LogDebug(Microsoft.Extensions.Logging.ILogger,Microsoft.Fabric.Logging.TracingEventId,System.Func{System.Collections.Generic.IReadOnlyDictionary{System.String,System.String}},System.String,System.Object[])">
+            <summary>
+            Formats and logs a debug log message.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="eventId">The event id associated with the log. You can specify a <see langword="string"/>.</param>
+            <param name="customData">Custom data related to the log.</param>
+            <param name="message">Format string of the log message in message template format. Example: "User {User} logged in from {Address}"</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <remarks>
+            When passing custom data, it's recommended to use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build it.
+            <para>
+            Also, it is recommended to initialize the value within the passed function to reduce performance when the used log level is disabled:
+            <code>
+            var customData = () => new CustomDataCollection().Add("key1", "value1").Add("key2", false);
+            _logger.LogDebug(eventId, customData, "Message");
+            </code>
+            </para>
+            Instead of:
+            <code>
+            var customData = new CustomDataCollection().Add("key1", "value,1").Add("key2", false);
+            _logger.LogDebug(eventId, () => customData, "Message");
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.FabricLoggingExtensions.LogInformation(Microsoft.Extensions.Logging.ILogger,Microsoft.Fabric.Logging.TracingEventId,System.Func{System.Collections.Generic.IReadOnlyDictionary{System.String,System.String}},System.String,System.Object[])">
+            <summary>
+            Formats and logs an informational log message.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="eventId">The event id associated with the log. You can specify a <see langword="string"/>.</param>
+            <param name="customData">Custom data related to the log. It's recommended to use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build it.</param>
+            <param name="message">Format string of the log message in message template format. Example: "User {User} logged in from {Address}"</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <remarks>
+            When passing custom data, it's recommended to use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build it.
+            <para>
+            Also, it is recommended to initialize the value within the passed function to reduce performance when the used log level is disabled:
+            <code>
+            var customData = () => new CustomDataCollection().Add("key1", "value1").Add("key2", false);
+            _logger.LogInformation(eventId, customData, "Message");
+            </code>
+            </para>
+            Instead of:
+            <code>
+            var customData = new CustomDataCollection().Add("key1", "value,1").Add("key2", false);
+            _logger.LogInformation(eventId, () => customData, "Message");
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.FabricLoggingExtensions.LogWarning(Microsoft.Extensions.Logging.ILogger,Microsoft.Fabric.Logging.TracingEventId,System.Func{System.Collections.Generic.IReadOnlyDictionary{System.String,System.String}},System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and logs a warning log message.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="eventId">The event id associated with the log. You can specify a <see langword="string"/>.</param>
+            <param name="customData">Custom data related to the log. It's recommended to use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build it.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message in message template format. Example: "User {User} logged in from {Address}"</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <remarks>
+            When passing custom data, it's recommended to use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build it.
+            <para>
+            Also, it is recommended to initialize the value within the passed function to reduce performance when the used log level is disabled:
+            <code>
+            var customData = () => new CustomDataCollection().Add("key1", "value1").Add("key2", false);
+            _logger.LogWarning(eventId, customData, "Message");
+            </code>
+            </para>
+            Instead of:
+            <code>
+            var customData = new CustomDataCollection().Add("key1", "value,1").Add("key2", false);
+            _logger.LogWarning(eventId, () => customData, "Message");
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.FabricLoggingExtensions.LogError(Microsoft.Extensions.Logging.ILogger,Microsoft.Fabric.Logging.TracingEventId,System.Func{System.Collections.Generic.IReadOnlyDictionary{System.String,System.String}},System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and logs an error log message.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="eventId">The event id associated with the log. You can specify a <see langword="string"/>.</param>
+            <param name="customData">Custom data related to the log. It's recommended to use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build it.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message in message template format. Example: "User {User} logged in from {Address}"</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <remarks>
+            When passing custom data, it's recommended to use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build it.
+            <para>
+            Also, it is recommended to initialize the value within the passed function to reduce performance when the used log level is disabled:
+            <code>
+            var customData = () => new CustomDataCollection().Add("key1", "value1").Add("key2", false);
+            _logger.LogError(eventId, customData, "Message");
+            </code>
+            </para>
+            Instead of:
+            <code>
+            var customData = new CustomDataCollection().Add("key1", "value,1").Add("key2", false);
+            _logger.LogError(eventId, () => customData, "Message");
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.FabricLoggingExtensions.LogCritical(Microsoft.Extensions.Logging.ILogger,Microsoft.Fabric.Logging.TracingEventId,System.Func{System.Collections.Generic.IReadOnlyDictionary{System.String,System.String}},System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and logs an error log message.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="eventId">The event id associated with the log. You can specify a <see langword="string"/>.</param>
+            <param name="customData">Custom data related to the log.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message in message template format. Example: "User {User} logged in from {Address}"</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <remarks>
+            When passing custom data, it's recommended to use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build it.
+            <para>
+            Also, it is recommended to initialize the value within the passed function to reduce performance when the used log level is disabled:
+            <code>
+            var customData = () => new CustomDataCollection().Add("key1", "value1").Add("key2", false);
+            _logger.LogCritical(eventId, customData, "Message");
+            </code>
+            </para>
+            Instead of:
+            <code>
+            var customData = new CustomDataCollection().Add("key1", "value,1").Add("key2", false);
+            _logger.LogCritical(eventId, () => customData, "Message");
+            </code>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.BeginNamedScope(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid)">
+            <summary>
+            Starts a new named scope for logging.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <returns>An <see cref="T:Microsoft.Fabric.Logging.ILoggingScope"/> instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.AddCustomData``1(Microsoft.Fabric.Logging.ILoggingScope,System.String,``0)">
+            <summary>
+            Adds custom dimension/metric to be emitted with logging scope.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+            <param name="scope">Logging scope.</param>
+            <param name="key">Key for the dimension/metric being added.</param>
+            <param name="value">The dimension/metric value.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.AddCustomData(Microsoft.Fabric.Logging.ILoggingScope,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object},System.Boolean)">
+            <summary>
+            Add custom metrics to be emitted with logging scope.
+            </summary>
+            <param name="scope">Logging scope.</param>
+            <param name="customData">Dictionary that contains pairs of key and value.</param>
+            <param name="throwWhenKeyExists">A value indicating whether to throw an exception if any of the keys in <paramref name="customData"/> already exists.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.AddCustomData(Microsoft.Fabric.Logging.ILoggingScope,System.Collections.Generic.IReadOnlyDictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            Add custom metrics to be emitted with logging scope.
+            </summary>
+            <remarks>For better development experience and performance, use <see cref="T:Microsoft.Fabric.Logging.CustomDataCollection"/> to build <paramref name="customData"/>.</remarks>
+            <param name="scope">Logging scope.</param>
+            <param name="customData">Dictionary that contains pairs of key and value.</param>
+            <param name="throwWhenKeyExists">A value indicating whether to throw an exception if any of the keys in <paramref name="customData"/> already exists.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.TryAddCustomData``1(Microsoft.Fabric.Logging.ILoggingScope,System.String,``0)">
+            <summary>
+            Tries adding a custom dimension/metric to be emitted with monitored scope.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+            <param name="scope">The current <see cref="!:MonitoredScope"/>.</param>
+            <param name="key">Key for the dimension/metric being added.</param>
+            <param name="value">The value of the dimension/metric.</param>
+            <returns><c>true</c> if successfully added; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope(Microsoft.Extensions.Logging.ILogger,System.String,System.Action{Microsoft.Fabric.Logging.ILoggingScope})">
+            <summary>
+            Executes an action in a named scope.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="action">The logic to execute within the scope.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope(Microsoft.Extensions.Logging.ILogger,System.String,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Action{Microsoft.Fabric.Logging.ILoggingScope})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="action">The logic to execute within the scope.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Action{Microsoft.Fabric.Logging.ILoggingScope})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="action">The logic to execute within the scope.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Action{Microsoft.Fabric.Logging.ILoggingScope})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="action">The logic to execute within the scope.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,System.Action{Microsoft.Fabric.Logging.ILoggingScope})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="action">The logic to execute within the scope.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Action{Microsoft.Fabric.Logging.ILoggingScope})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="action">The logic to execute within the scope.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Func{Microsoft.Fabric.Logging.ILoggingScope,``0})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="func">The logic to execute within the scope.</param>
+            <returns>The value returned by the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope``1(Microsoft.Extensions.Logging.ILogger,System.String,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,``0})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="func">The logic to execute within the scope.</param>
+            <returns>The value returned by the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Func{Microsoft.Fabric.Logging.ILoggingScope,``0})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="func">The logic to execute within the scope.</param>
+            <returns>The value returned by the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,``0})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="func">The logic to execute within the scope.</param>
+            <returns>The value returned by the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,System.Func{Microsoft.Fabric.Logging.ILoggingScope,``0})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="func">The logic to execute within the scope.</param>
+            <returns>The value returned by the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScope``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,``0})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="func">The logic to execute within the scope.</param>
+            <returns>The value returned by the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync(Microsoft.Extensions.Logging.ILogger,System.String,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task})">
+            <summary>
+            Executes an asynchronous action in a named scope.
+            </summary>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="action">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync(Microsoft.Extensions.Logging.ILogger,System.String,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task})">
+            <summary>
+            Executes an asynchronous action in a named scope.
+            </summary>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="action">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task})">
+            <summary>
+            Executes an asynchronous action in a named scope.
+            </summary>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="action">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task})">
+            <summary>
+            Executes an asynchronous action in a named scope.
+            </summary>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="action">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task})">
+            <summary>
+            Executes an asynchronous action in a named scope.
+            </summary>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="action">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task})">
+            <summary>
+            Executes an asynchronous action in a named scope.
+            </summary>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="action">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Executes an asynchronous function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="func">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task returning the value result from the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync``1(Microsoft.Extensions.Logging.ILogger,System.String,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Executes an asynchronous function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="func">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task returning the value result from the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Executes an asynchronous function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="func">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task returning the value result from the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Executes an asynchronous function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="func">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task returning the value result from the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Executes an asynchronous function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="func">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task returning the value result from the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeAsync``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Executes an asynchronous function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="func">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task returning the value result from the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.Monitor(Microsoft.Fabric.Logging.ILoggingScope,Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs,System.Action)">
+            <summary>
+            Monitors a dependency within the current scope.
+            </summary>
+            <param name="scope">The current logging scope.</param>
+            <param name="dependencyArgs">Dependency monitoring arguments.</param>
+            <param name="action">The dependency action to monitor.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.MonitorAsync(Microsoft.Fabric.Logging.ILoggingScope,Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs,System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            Monitors a dependency within the current scope.
+            </summary>
+            <param name="scope">The current logging scope.</param>
+            <param name="dependencyArgs">Dependency monitoring arguments.</param>
+            <param name="action">The dependency action to monitor.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.Monitor``1(Microsoft.Fabric.Logging.ILoggingScope,Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs,System.Func{``0})">
+            <summary>
+            Monitors a dependency within the current scope.
+            </summary>
+            <typeparam name="TResult">The type of the result returned by dependency invocation.</typeparam>
+            <param name="scope">The current scope.</param>
+            <param name="dependencyArgs">Dependency monitoring arguments.</param>
+            <param name="func">The dependency functionality to monitor.</param>
+            <returns>The result of the dependency invocation.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.MonitorAsync``1(Microsoft.Fabric.Logging.ILoggingScope,Microsoft.Fabric.Logging.Monitoring.LoggingDependencyMonitoringArgs,System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Monitors a dependency within the current scope.
+            </summary>
+            <typeparam name="TResult">The type of the result returned by dependency invocation.</typeparam>
+            <param name="scope">The current scope.</param>
+            <param name="dependencyArgs">Dependency monitoring arguments.</param>
+            <param name="func">The dependency functionality to monitor.</param>
+            <returns>An awaitable task with the result of the dependency invocation.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeInternal(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Action{Microsoft.Fabric.Logging.ILoggingScope})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="action">The logic to execute within the scope.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeInternal``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,``0})">
+            <summary>
+            Executes a function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="logger">The current logger.</param>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="func">The logic to execute within the scope.</param>
+            <returns>The value returned by the function.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeInternalAsync(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task})">
+            <summary>
+            Executes an asynchronous action in a named scope.
+            </summary>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="callbackArgs">Scope callback arguments</param>
+            <param name="action">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Logging.LoggingScopeExtensions.ExecuteInScopeInternalAsync``1(Microsoft.Extensions.Logging.ILogger,System.String,System.Guid,System.Guid,Microsoft.Fabric.Logging.Monitoring.LoggingScopeCallbackArgs,System.Func{Microsoft.Fabric.Logging.ILoggingScope,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Executes an asynchronous function in a named scope.
+            </summary>
+            <typeparam name="TResult">The type of the returned value.</typeparam>
+            <param name="scopeName">The name of the scope.</param>
+            <param name="parentActivityId">The parent activity ID.</param>
+            <param name="rootActivityId">The root activity ID.</param>
+            <param name="func">The asynchronous logic to execute within the scope.</param>
+            <returns>An awaitable task returning the value result from the function.</returns>
+        </member>
+    </members>
+</doc>

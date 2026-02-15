@@ -1,0 +1,710 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Fabric.RelayBridge</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Fabric.Relay.Connections.DevConnection.#ctor(Microsoft.Extensions.Logging.ILogger{Microsoft.Fabric.Relay.Connections.DevConnection},Microsoft.Fabric.Security.Authentication.IAuthenticationTokenProvider,Microsoft.Fabric.Relay.Connections.Services.IPbiSharedClient,Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformClient,Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider,Microsoft.Fabric.Relay.IRelayBridgeService,Microsoft.Fabric.Relay.Connections.Services.IDynamicWorkloadHealthCheckPollingService,Microsoft.Extensions.Hosting.IHostApplicationLifetime,Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Relay.Connections.DevConnection"/> class.
+            </summary>
+            <param name="tracer">Tracer adapter.</param>
+            <param name="interactiveAuthenticationTokenProvider">Interactive Authentication Token Provider.</param>
+            <param name="pbiSharedClient">Workload registration client.</param>
+            <param name="mwcFrontendHttpClient">Workload registration client to MWC frontend.</param>
+            <param name="mwcPlatformHttpClientProvider">MWC platform HTTP client provider.</param>
+            <param name="healthCheckService">Workload health check polling service.</param>
+            <param name="relayBridgeService">Relay bridge service.</param>
+            <param name="hostApplicationLifetime">Host application lifetime.</param>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.IEndpointConnectionsSynchronizer">
+            <summary>
+            Synchronization service for endpoints relay connections.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.WorkspaceGuid">
+            <summary>
+            Gets or sets the workspace guid where the dev instance may connect to.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.CapacityGuid">
+            <summary>
+            Gets or sets the capacity guid where the dev instance may connect to.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.EnvironmentType">
+            <summary>
+            Gets or sets the environment type: OneBox, Test, Production, etc.
+            The default is Public.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.UseDirectMwcRegistration">
+            <summary>
+            Whether use direct MWC registration or not.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.MwcRolloutName">
+            <summary>
+            Gets or sets MWC rollout name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.WorkloadId">
+            <summary>
+            Gets or sets Workload Id.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.WorkloadToOrchestratorHealthCheckEnabled">
+            <summary>
+            Gets or sets  whether or not the workload->orchestrator health check is enabled.
+            DEVXTODO: We should make health check run for both 1p and 3p workloads but for now it fails in prod environments because we do not currently
+            provide the api key for calling back through the relay to 3p workloads
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.EnvironmentInfo">
+            <summary>
+            Gets the environment info.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.CstSharedGlobalServiceApiEndpoint">
+            <summary>
+            Gets or sets MWC CST clusters shared global service api endpoint (used for testing).
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.UserAuthorizationToken">
+            <summary>
+            Gets or sets the user authorization token.
+            </summary>
+            <remarks>
+            FOR TESTING PURPOSES ONLY.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.ManifestPackageFilePath">
+            <summary>
+            Gets or sets the manifest package file path.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.MwcFrontendBaseEndpoint">
+            <summary>
+            Gets or sets the MWC frontend base endpoint. If this is not null, the MWC registration will be done directly to this endpoint.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.UseManifestPublicProperty">
+            <summary>
+            Gets or sets whether public property of the manifest is used.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.Mappings">
+            <summary>
+            Gets the endpoint mappings for the relay connection.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.ConnectionSynchronizer">
+            <summary>
+            Gets or sets the endpoint connections synchronizer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.RelayConnectionOptionsBase.SignalReady">
+            <summary>
+            Signals the consuming <see cref="T:Microsoft.Fabric.Relay.Connections.DevConnection"/> that the endpoints are ready.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.Contracts.StartupParameters.WorkloadId">
+            <summary>
+            The ID of the workload that was registered. This is always set.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.Contracts.StartupParameters.WorkloadInstanceGuid">
+            <summary>
+            A unique identifier for the workload instance. This is always set.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.Contracts.StartupParameters.AuthenticationConfiguration">
+            <summary>
+            A json-serialized authentication configuration string. This does not contain any secrets, but is only set for first-party workload registration
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.Contracts.StartupParameters.MwcTempDataStorageAccountsConfiguration">
+            <summary>
+            A json-serialized configuration string for the temp storage accounts configuration. This is only set for first-party workload registration
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.Contracts.StartupParameters.EnvironmentVariables">
+            <summary>
+            A string-string dictionary of environment variables to specify for the workload startup. This is only set for first-party workload registration
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.Contracts.StartupParameters.DevModeWorkloadConfigSettings">
+            <summary>
+            A string-string dictionary of workload config settings to specify for the workload startup. This is only set for first-party workload registration
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.Services.Contracts.WorkloadRegistrationRequest">
+            <summary>
+            Workload registration request content
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.Contracts.WorkloadRegistrationRequest.ManifestPackage">
+            <summary>
+            Gets or Sets the manifest package
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.DynamicWorkloadHealthCheckPollingService.MonitorWorkloadAsync(System.String,System.String,System.Action,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.DynamicWorkloadHealthCheckPollingService.GetInitialHealthCheckDelaySeconds">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.Services.Exceptions.DevInstanceRegistrationFailedException">
+            <summary>
+            Thrown if workload dev instance cannot be registered.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.Exceptions.DevInstanceRegistrationFailedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Relay.Connections.Services.Exceptions.DevInstanceRegistrationFailedException"/> class.
+            </summary>
+            <param name="message">A message describing the exception.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.Exceptions.DevInstanceRegistrationFailedException.#ctor(System.String,System.Net.HttpStatusCode,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Relay.Connections.Services.Exceptions.DevInstanceRegistrationFailedException"/> class.
+            </summary>
+            <param name="message">A message describing the error.</param>
+            <param name="statusCode">The <see cref="T:System.Net.HttpStatusCode"/> to report.</param>
+            <param name="reasonPhrase">The reason for failure.</param>
+            <param name="responseContent">The content to be sent to caller.</param>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.Services.Exceptions.HealthCheckFailedException">
+            <summary>
+            Thrown if workload dev instance cannot be registered
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.Services.HealthCheckPollingOptions">
+            <summary>
+            Options to initialize <see cref="T:Microsoft.Fabric.Relay.Connections.Services.DynamicWorkloadHealthCheckPollingService"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.HealthCheckPollingOptions.MaxConsecutiveFailuresForShutdown">
+            <summary>
+            Gets or sets the number of consecutive failres before shutting down.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.HealthCheckPollingOptions.PollingIntervalInSeconds">
+            <summary>
+            Gets or sets the interval in seconds for health checks.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Connections.Services.HealthCheckPollingOptions.InitialHealthCheckDelaySeconds">
+            <summary>
+            Gets or sets the interval in seconds for health checks for the first time.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IDynamicWorkloadHealthCheckPollingService.MonitorWorkloadAsync(System.String,System.String,System.Action,System.Threading.CancellationToken)">
+            <summary>
+            Starts a background task to call health check endpoint at a configured interval.
+            </summary>
+            <param name="instanceGuid">Instance GUID.</param>
+            <param name="userAadToken">User AAD token.</param>
+            <param name="shutdownFunction">Callback to invoke on shutdown.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Async task.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IDynamicWorkloadHealthCheckPollingService.GetInitialHealthCheckDelaySeconds">
+            <summary>
+            Retrieves the initial delay for health check polling.
+            </summary>
+            <returns>A task that represents the asynchronous operation, containing the initial delay in seconds.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformClient.RegisterCurrentDevInstanceAsync(Microsoft.Fabric.Relay.Connections.Services.Contracts.DevInstanceRegistrationRequest,System.String)">
+            <summary>
+            Calls MWC workload dev instance registration endpoint
+            </summary>
+            <param name="request">registration request</param>
+            <param name="userAadToken">user AAD token</param>
+            <returns>registration response</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformClient.HealthCheckCurrentDevInstanceAsync(System.String,System.String)">
+            <summary>
+            Calls MWC workload dev instance health check endpoint
+            </summary>
+            <param name="instanceGuid">instance GUID</param>
+            <param name="userAadToken">user AAD token</param>
+            <returns>registration response</returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider">
+            <summary>
+            Client  for MWC.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider.InitializeFrontendEndpoint(System.String)">
+            <summary>
+            Initialize provider with MWC frontend base endpoint.
+            </summary>
+            <param name="mwcFrontendBaseEndpoint">MWC frontend base endpoint.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider.InitializeOrchestratorEndpoint(System.String,Microsoft.Fabric.Relay.AzureRelayAuthInfo)">
+            <summary>
+            Initialize provider with the endpoint for hitting orchestrator through the azure relay
+            </summary>
+            <remarks>
+            What should be provided here is exactly what comes back in the registration response for PlatformApiUri. This has not just the base address
+            for getting through the relay but also the extra path segment for reaching the dev mode workload health check controller /endpoint/Microsoft.Fabric.Platform
+            For the first-party use case where this same class is used to create http clients for reaching other internal endpoints on orchestrator, we strip off that extra path internally.
+            </remarks>
+            <param name="mwcOrchestratorEndpoint">MWC orchestrator endpoint.</param>
+            <param name="platformAuthInfo">Object containing the service bus key name and key for accessing orchestrator through the relay</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider.InitializePbiSharedEndpoint(System.String)">
+            <summary>
+            Initialize provider with PbiShared base endpoint.
+            </summary>
+            <param name="pbiSharedBaseEndpoint">PbiShared base endpoint.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider.GetMwcFrontendHttpClient">
+            <summary>
+            Gets HttpClient for accessing MWC endpoints.
+            </summary>
+            <returns>An instance of <see cref="T:System.Net.Http.HttpClient"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider.GetPbiSharedHttpClient">
+            <summary>
+            Gets HttpClient for accessing PbiShared public endpoints.
+            </summary>
+            <returns>An instance of <see cref="T:System.Net.Http.HttpClient"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider.GetMwcOrchestratorHttpClient">
+            <summary>
+            Gets HttpClient for accessing MWC endpoints.
+            </summary>
+            <returns>An instance of <see cref="T:System.Net.Http.HttpClient"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider.GetMwcOrchestratorHttpClientHandler(System.String)">
+            <summary>
+            Gets a client handler for accessing MWC orchestrator endpoints. This handler will automatically add the necessary service bus token to the request,
+            and replaces the given base path in requests with the relay's base path
+            </summary>
+            <param name="originalOrchestratorBasePath">The original orchestrator base address which should be replaced with the relay address</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.IPbiSharedClient.RegisterCurrentDevInstanceAsync(Microsoft.Fabric.Relay.Connections.Services.Contracts.WorkloadRegistrationRequest,System.Nullable{System.Guid},System.Nullable{System.Guid},System.String)">
+            <summary>
+            Calls PBIShared workload dev instance registration endpoint.
+            </summary>
+            <param name="requestBody">Registration message body.</param>
+            <param name="workspaceGuid">Workspace GUID</param>
+            <param name="capacityGuid">Capacity GUID.</param>
+            <param name="userAadToken">User AAD token.</param>
+            <returns>Registration response.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformClient.#ctor(Microsoft.Extensions.Logging.ILogger{Microsoft.Fabric.Relay.Connections.Services.MwcPlatformClient},Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformClient"/> class.
+            </summary>
+            <param name="tracerAdapter">Tracer adapter.</param>
+            <param name="httpClientProvider">HttpClient provider to interact with MWC platform.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformClient.RegisterCurrentDevInstanceAsync(Microsoft.Fabric.Relay.Connections.Services.Contracts.DevInstanceRegistrationRequest,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformClient.HealthCheckCurrentDevInstanceAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformHttpClientProvider.InitializeFrontendEndpoint(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformHttpClientProvider.InitializeOrchestratorEndpoint(System.String,Microsoft.Fabric.Relay.AzureRelayAuthInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformHttpClientProvider.InitializePbiSharedEndpoint(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformHttpClientProvider.GetMwcFrontendHttpClient">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformHttpClientProvider.GetPbiSharedHttpClient">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformHttpClientProvider.GetMwcOrchestratorHttpClient">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.MwcPlatformHttpClientProvider.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.PbiSharedClient.#ctor(Microsoft.Extensions.Logging.ILogger{Microsoft.Fabric.Relay.Connections.Services.PbiSharedClient},Microsoft.Fabric.Relay.Connections.Services.IMwcPlatformHttpClientProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Relay.Connections.Services.PbiSharedClient"/> class.
+            </summary>
+            <param name="logger">Tracer adapter.</param>
+            <param name="httpClientProvider">HttpClient provider to interact with MWC platform.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.Connections.Services.PbiSharedClient.RegisterCurrentDevInstanceAsync(Microsoft.Fabric.Relay.Connections.Services.Contracts.WorkloadRegistrationRequest,System.Nullable{System.Guid},System.Nullable{System.Guid},System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.AzureRelayAuthInfo">
+            <summary>
+            Azure Relay key info.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.AzureRelayAuthInfo.KeyName">
+            <summary>
+            Gets or sets Azure Relay access key name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.AzureRelayAuthInfo.Key">
+            <summary>
+            Gets or sets Azure Relay access key.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.AzureRelayAuthInfo.ConnectionString">
+            <summary>
+            Gets or sets Azure Relay Connection String.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.BaseAzureRelayConfiguration">
+            <summary>
+            Azure Relay connection configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.BaseAzureRelayConfiguration.RelayNamespace">
+            <summary>
+            Gets or sets Azure Relay namespace.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.BaseAzureRelayConfiguration.ConnectionName">
+            <summary>
+            Gets or sets Azure Relay connection name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.BaseAzureRelayConfiguration.ServiceBusEndpoint">
+            <summary>
+            Gets or sets Azure Relay ServiceBus Endpoint Url.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.FullAzureRelayConfiguration">
+            <summary>
+            Azure Relay connection configuration with listener and sender info.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.FullAzureRelayConfiguration.SenderKeyInfo">
+            <summary>
+            Gets or sets Azure Relay sender access key info.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.FullAzureRelayConfiguration.ListenerKeyInfo">
+            <summary>
+            Gets or sets Azure Relay listener access key info.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.ListenerAzureRelayConfiguration">
+            <summary>
+            Azure Relay listener connection configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.ListenerAzureRelayConfiguration.ListenerKeyInfo">
+            <summary>
+            Gets or sets Azure Relay listener access key info.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.SenderAzureRelayConfiguration">
+            <summary>
+            Azure Relay sender connection configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.SenderAzureRelayConfiguration.SenderKeyInfo">
+            <summary>
+            Gets or sets Azure Relay sender access key info.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Data.RelayForwardingRouteMapping">
+            <summary>
+            Azure Relay to web endpoint routing mapping.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayForwardingRouteMapping.IncomingUrlPathPrefix">
+            <summary>
+            Gets or sets url path prefix for incoming requests to be handled by relay forwarding service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayForwardingRouteMapping.OutgoingBaseUrl">
+            <summary>
+            Gets or sets outgoing base url to which requests will be routed by relay forwarding service.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Data.RelayRequest">
+            <summary>
+            Relay incoming request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayRequest.HttpMethod">
+            <summary>
+            Gets or sets http Method such as GET, POST.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayRequest.RequestUrl">
+            <summary>
+            Gets or sets relay absolute Uri.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayRequest.HasEntityBody">
+            <summary>
+            Gets or sets a value indicating whether request contain body.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayRequest.InputStream">
+            <summary>
+            Gets or sets stream which contain request body.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayRequest.Headers">
+            <summary>
+            Gets or sets request headers.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Data.RelayResponse">
+            <summary>
+            Relay response object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayResponse.StatusCode">
+            <summary>
+            Gets or sets relay response code.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayResponse.StatusDescription">
+            <summary>
+            Gets or sets relay response status description.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.Data.RelayResponse.ResponseMessage">
+            <summary>
+            Gets or sets response content stream.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.Exceptions.RelayForwardingServiceException">
+            <summary>
+            Exception to run relay forwarding service.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.IRelayBridgeService">
+            <summary>
+            Relay bridge service. It establishes bridge connection between relay and http controllers for any incoming requests over relay.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayBridgeService.StartBridgeAsync(Microsoft.Fabric.Relay.ListenerAzureRelayConfiguration,System.Collections.Generic.IList{Microsoft.Fabric.Endpoints.IEndpointMapping},System.Action)">
+            <summary>
+            Starts relay bridge.
+            </summary>
+            <param name="relayListenerConfig">Relay listener configuration.</param>
+            <param name="endpointMappings">A list of endpoint mappings.</param>
+            <param name="shutdownFunc">Shutdown function.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayBridgeService.StopBridgeAsync">
+            <summary>
+            Stops relay bridge.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.IRelayConnectionListener">
+            <summary>
+            Relay connection listener which listen incoming relay requests.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.IRelayConnectionListener.RequestHandler">
+            <summary>
+            Gets or sets relay request handler.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Relay.IRelayConnectionListener.OfflineHandler">
+            <summary>
+            Gets or sets relay offline handler.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayConnectionListener.GetAddress">
+            <summary>
+            Get relay listening address.
+            </summary>
+            <returns> Relay listening address.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayConnectionListener.OpenAsync">
+            <summary>
+            Start relay listening.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayConnectionListener.CloseAsync">
+            <summary>
+            Stop relay listening.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.IRelayConnectionListenerProvider">
+            <summary>
+            Relay connection listener provider.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayConnectionListenerProvider.GetConnectionListener(Microsoft.Fabric.Relay.ListenerAzureRelayConfiguration)">
+            <summary>
+            Create hybrid Relay connection listener based on provided azure relay configuration.
+            </summary>
+            <param name="configuration">Azure Relay listener access configuration.</param>
+            <returns>
+            hybrid connection listener instance.
+            </returns>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.IRelayForwardingService">
+            <summary>
+            Relay forwarding service which route incoming relay requests to http endpoints.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayForwardingService.StartListenerAsync(Microsoft.Fabric.Relay.ListenerAzureRelayConfiguration,System.Collections.Generic.List{Microsoft.Fabric.Relay.Data.RelayForwardingRouteMapping},System.String,System.Net.Http.HttpMessageHandler,System.Action{System.Exception})">
+            <summary>
+            Start relay listener instance
+            This overload exists for compatibility with existing consumers, that rely on preserving the path prefix.
+            </summary>
+            <param name="config">Azure Relay listener access configuration.</param>
+            <param name="mapping">Incoming to outgoing requests mapping. The incoming prefix will be preserved when constructing the outgoing URL.</param>
+            <param name="name">Relay listener instance name.</param>
+            <param name="outgoingHttpHandler">Handler for forwarding requests.</param>
+            <param name="disconnectHandler">Handler for handling relay disconnect events.</param>
+            <returns>
+            Relay listener instance name, generated in case it's not provided as input parameter.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayForwardingService.StartListenerAsync(Microsoft.Fabric.Relay.ListenerAzureRelayConfiguration,System.Collections.Generic.List{Microsoft.Fabric.Relay.Data.RelayForwardingRouteMapping},System.Boolean,System.String,System.Net.Http.HttpMessageHandler,System.Action{System.Exception})">
+            <summary>
+            Start relay listener instance.
+            </summary>
+            <param name="config">Azure Relay listener access configuration.</param>
+            <param name="mapping">Incoming to outgoing requests mapping.</param>
+            <param name="preservePathPrefix">Specifies whether the incoming prefix should be preserved when constructing the outgoing URL.</param>
+            <param name="name">Relay listener instance name.</param>
+            <param name="outgoingHttpHandler">Handler for forwarding requests.</param>
+            <param name="disconnectHandler">Handler for handling relay disconnect events.</param>
+            <returns>
+            Relay listener instance name, generated in case it's not provided as input parameter.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayForwardingService.StopListenerAsync(System.String)">
+            <summary>
+            Stops relay listener instance.
+            </summary>
+            <param name="name">The relay listener instance name.</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayForwardingService.StopAllListenersAsync">
+            <summary>
+            Stops all relay listener instances.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.IRelayListener">
+            <summary>
+            Relay forwarding listener which route incoming relay requests to http endpoint.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayListener.StartAsync">
+            <summary>
+            Starts listening for incoming relay requests and forward to http endpoint.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayListener.StopAsync">
+            <summary>
+            Stops listening for incoming relay requests and forward to http endpoint.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.IRelayListener.AddOfflineHandler(System.Action{System.Exception})">
+            <summary>
+            Adds relay connection offline handler.
+            </summary>
+            <param name="handler"> offline handler for relay connection.</param>
+        </member>
+        <member name="T:Microsoft.Fabric.Relay.RelayBridgeService">
+            <summary>
+            Relay bridge service implementation.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.RelayBridgeService.StartBridgeAsync(Microsoft.Fabric.Relay.ListenerAzureRelayConfiguration,System.Collections.Generic.IList{Microsoft.Fabric.Endpoints.IEndpointMapping},System.Action)">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.RelayBridgeService.StopBridgeAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.RelayBridgeService.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="F:Microsoft.Fabric.Relay.RelayListener.RelayListenerResponseHeaderName">
+            <summary>
+            Header which is added to all responses that come from a relay listener. This allows health checks to determine if the listener is the one responding.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Relay.RelayListener.ActivityIdHeader">
+            <summary>
+            The activity id header name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Relay.RelayListener.RequestIdHeader">
+            <summary>
+            The request id header name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Relay.RelayListener._relayListener">
+            <summary>
+            Incoming relay listener.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Relay.RelayListener._httpClient">
+            <summary>
+            Outgoing http client.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Relay.RelayListener._relayForwardingRouteMapping">
+            <summary>
+            Relay forwarding mapping.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Relay.RelayListener._logger">
+            <summary>
+            Log tracer.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Fabric.Relay.RelayListener._disposed">
+            <summary>
+            Is object disposed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.RelayListener.HandleRelayRequestAsync(Microsoft.Fabric.Relay.Data.RelayRequest)">
+            <summary>
+            Handles incoming relay requests.
+            </summary>
+            <param name="relayRequest">The incoming relay request.</param>
+            <returns>A RelayResponse object containing the response to the request.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.RelayListener.ProcessRequestAsync(Microsoft.Fabric.Relay.Data.RelayRequest,System.Uri)">
+            <summary>
+            Processes regular (non-health check) requests.
+            </summary>
+            <param name="relayRequest">The incoming relay request.</param>
+            <param name="relayBaseListeningUri">The base URI of the relay listener.</param>
+            <returns>A RelayResponse object containing the response to the request.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.RelayListener.ForwardRequestAsync(Microsoft.Fabric.Relay.Data.RelayRequest,System.String,System.String)">
+            <summary>
+            Forwards the request to the appropriate destination.
+            </summary>
+            <param name="relayRequest">The incoming relay request.</param>
+            <param name="forwardingUrl">The URL to forward the request to.</param>
+            <param name="requestUrl">The original request URL.</param>
+            <returns>A RelayResponse object containing the response from the forwarded request.</returns>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.RelayListener.AddRelayListenerResponseHeaderIfNeeded(Microsoft.Fabric.Relay.Data.RelayResponse)">
+            <summary>
+            Adds a header indicating that the response is coming from a relay listener if the header does not already exist on the response
+            </summary>
+            <param name="relayResponse">the response to add the header to</param>
+        </member>
+        <member name="M:Microsoft.Fabric.Relay.RelayListener.GetHeaders(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Collections.Generic.IEnumerable{System.String}}},System.Collections.Generic.List{System.String})">
+            <summary>
+            Extracts specified headers from any header collection (HttpResponseHeaders or WebHeaderCollection) and returns them as a dictionary.
+            </summary>
+            <param name="headers">An enumerable of key-value pairs representing the headers.</param>
+            <param name="headersToLog">A list of header names to extract from the headers collection.</param>
+            <returns>A dictionary containing the specified headers and their corresponding values. If a header is not found or has an empty value, it is not included in the result.</returns>
+        </member>
+    </members>
+</doc>

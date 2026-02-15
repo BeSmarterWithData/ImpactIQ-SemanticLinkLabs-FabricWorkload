@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Fabric.Workload.DevGateway</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Fabric.Workloads.DevGateway.DevGatewayOptions">
+            <summary>
+            Configuration of the workload
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Workloads.DevGateway.DevGatewayOptions.WorkloadEndpointUrl">
+            <summary>
+            Gets or sets the workload endpoint URL.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Workloads.DevGateway.DevGatewayOptions.AllowHttpWorkloadEndpointUrl">
+            <summary>
+            Gets or sets if workload endpoint is allowed to use http.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Fabric.Workloads.DevGateway.IsDevGatewayConfigured.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{Microsoft.Fabric.Workloads.DevGateway.DevGatewayOptions})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Fabric.Workloads.DevGateway.IsDevGatewayConfigured"/> class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Fabric.Workloads.DevGateway.IsDevGatewayConfigured.LogMessage">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.Fabric.Workloads.DevGateway.Program.ExtractLogLevel(System.String[])">
+            <summary>
+            Extracts the log level argument from the command line arguments.
+            </summary>
+            <param name="args">The command line arguments.</param>
+            <returns>The parsed log level if specified, or the default one if not found or invalid.</returns>
+            <exception cref="T:System.ArgumentException">Thrown when the provided log level is invalid.</exception>
+        </member>
+    </members>
+</doc>
