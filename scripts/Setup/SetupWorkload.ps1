@@ -91,8 +91,18 @@ if ($null -eq $nodeVersion) {
     if ($IsLinux) {
         Write-Host "Installing Node.js via apt-get..."
         try {
-            sudo apt-get update -qq
-            sudo apt-get install -y nodejs npm
+            # Update package lists
+            $updateResult = sudo apt-get update -qq 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                throw "apt-get update failed"
+            }
+            
+            # Install Node.js and npm
+            $installResult = sudo apt-get install -y nodejs npm 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                throw "apt-get install failed"
+            }
+            
             Write-Host "✅ Node.js installed successfully" -ForegroundColor Green
         } catch {
             Write-Error "Failed to install Node.js. Please install it manually from https://nodejs.org/"
@@ -102,6 +112,9 @@ if ($null -eq $nodeVersion) {
         Write-Host "Installing Node.js via Homebrew..."
         try {
             brew install node
+            if ($LASTEXITCODE -ne 0) {
+                throw "Homebrew install failed"
+            }
             Write-Host "✅ Node.js installed successfully" -ForegroundColor Green
         } catch {
             Write-Error "Failed to install Node.js. Please install it manually from https://nodejs.org/"
@@ -155,7 +168,10 @@ if ($null -eq $azVersion) {
         Write-Host "Installing Azure CLI via apt-get..."
         try {
             # Install Azure CLI for Debian/Ubuntu using the installation script
-            bash -c "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash"
+            $installScript = bash -c "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash" 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                throw "Azure CLI installation script failed"
+            }
             
             Write-Host "✅ Azure CLI installed successfully" -ForegroundColor Green
         } catch {
@@ -168,7 +184,13 @@ if ($null -eq $azVersion) {
         Write-Host "Installing Azure CLI via Homebrew..."
         try {
             brew update
+            if ($LASTEXITCODE -ne 0) {
+                throw "Homebrew update failed"
+            }
             brew install azure-cli
+            if ($LASTEXITCODE -ne 0) {
+                throw "Homebrew install failed"
+            }
             Write-Host "✅ Azure CLI installed successfully" -ForegroundColor Green
         } catch {
             Write-Warning "Failed to install Azure CLI automatically. You may need to install it manually."
